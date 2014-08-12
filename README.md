@@ -1,8 +1,10 @@
-Ionic App Base
-=====================
+# Ionic In-app Purchase Seed Project
 
-A starting project for Ionic that optionally supports
-using custom SCSS.
+Project to experiment with in-app purchase on iOS and Android for an Ionic project.
+
+## Details
+
+* This project follows [this tutorial](http://fovea.cc/blog/index.php/3-steps-tutorial-for-phonegap-in-app-purchase-on-ios/) for iOS integration.
 
 ## Using this project
 
