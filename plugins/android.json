@@ -1,0 +1,15 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cc.fovea.plugins.inapppurchase": {
+            "PACKAGE_NAME": "com.tapestryd.ionic_in_app_purchase_seed"
+        }
+    },
+    "dependent_plugins": {}
+}
