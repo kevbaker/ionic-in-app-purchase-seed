@@ -25,5 +25,48 @@
 
   <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
+    <script>
+
+      var IAP = {
+        list: [ "M1" ]
+      };
+
+      IAP.load = function () {
+        // Check availability of the storekit plugin
+        if (!window.storekit) {
+          console.log("In-App Purchases not available");
+          return;
+        }
+
+        // Initialize
+        storekit.init({
+          debug:    true, // Enable IAP messages on the console
+          ready:    IAP.onReady,
+          purchase: IAP.onPurchase,
+          restore:  IAP.onRestore,
+          error:    IAP.onError
+        });
+      };
+
+      // StoreKit's callbacks (we'll talk about them later)
+      IAP.onReady = function () {};
+      IAP.onPurchase = function () {};
+      IAP.onRestore = function () {};
+      IAP.onError = function () {};
+
+      // storekit.load(productIds, callback)
+
+      IAP.onReady = function () {
+          // Once setup is done, load all product data.
+          storekit.load(IAP.list, function (products, invalidIds) {
+            IAP.products = products;
+            IAP.loaded = true;
+            for (var i = 0; i < invalidIds.length; ++i) {
+              console.log("Error: could not load " + invalidIds[i]);
+            }
+        });
+      };
+
+    </script>
   </body>
 </html>
