@@ -30,6 +30,8 @@
       <h1>
         <a href="#" onclick="initApp();">Init IAP App</a>
       </h1>
+      <div id="in-app-purchase-list">
+      </div>
     </div>
     <script>
     alert("IAP Example");
@@ -57,7 +59,6 @@
         else {
           alert("In-App Purchase available!");
         }
-        /*
         alertlog("before storekit.init");
         console.log(storekit);
         // Initialize
@@ -96,8 +97,31 @@
               console.log("Error: could not load " + invalidIds[i]);
             }
             alertlog("after storekit.load");
+            renderIAPs(document.getElementById('in-app-purchase-list'));
         });
-      */
+      };
+
+      var renderIAPs = function (el) {
+        if (IAP.loaded) {
+          var coins10  = IAP.products["cc.fovea.coins10"];
+          var coins100 = IAP.products["cc.fovea.coins100"];
+          var html = "<ul>";
+          for (var id in IAP.products) {
+            var prod = IAP.products[id];
+            html += "<li>" + 
+             "<h3>" + prod.title + "</h3>" +
+             "<p>" + prod.description + "</p>" +
+             "<button type='button' " +
+             "onclick='IAP.buy(\"" + prod.id + "\")'>" +
+             prod.price + "</button>" +
+             "</li>";
+          }
+          html += "</ul>";
+          el.innerHTML = html;
+        }
+        else {
+          el.innerHTML = "In-App Purchases not available.";
+        }
       };
       IAP.load();
     }
