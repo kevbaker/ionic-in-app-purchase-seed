@@ -25,7 +25,7 @@
 
   <!-- body ng-app="starter" -->
   <!--ion-nav-view></ion-nav-view-->
-  <body>
+  <body onload="">
     <div id="main" style="margin-top:50px">
       <h1>
         <a href="#" onclick="initApp();">Init IAP App</a>
@@ -34,30 +34,31 @@
       </div>
     </div>
     <script>
-    alert("IAP Example");
 
     function alertlog(msg){
-      alert(msg);
+      //alert(msg);
       console.log(msg);
     }
 
+    function loadApp(){
+
+    }
     function initApp(){
 
-      alertlog("initApp");
+      //alertlog("initApp");
 
       var IAP = {
         list: [ "M1" ]
       };
       alertlog("before IAP.load");
       IAP.load = function () {
-        alert("IAP.load called");
         // Check availability of the storekit plugin
         if (!window.storekit) {
           alert("In-App Purchases not available");
           return;
         }
         else {
-          alert("In-App Purchase available!");
+          alertlog("In-App Purchase available!");
         }
         alertlog("before storekit.init");
         console.log(storekit);
@@ -101,6 +102,11 @@
         });
       };
 
+      function buy(productId) {
+        alert("buy stuff");
+        storekit.purchase(productId);
+      };
+
       var renderIAPs = function (el) {
         if (IAP.loaded) {
           var coins10  = IAP.products["cc.fovea.coins10"];
@@ -111,9 +117,9 @@
             html += "<li>" + 
              "<h3>" + prod.title + "</h3>" +
              "<p>" + prod.description + "</p>" +
-             "<button type='button' " +
-             "onclick='IAP.buy(\"" + prod.id + "\")'>" +
-             prod.price + "</button>" +
+             "<a href='#' " +
+             "onclick='buy(\"" + prod.id + "\")'>buy monkey for " +
+             prod.price + "</a>" +
              "</li>";
           }
           html += "</ul>";
@@ -123,6 +129,19 @@
           el.innerHTML = "In-App Purchases not available.";
         }
       };
+
+      IAP.onPurchase = function (transactionId, productId, receipt) {
+        alert('Congratulation, you know own a monkey');
+        alert("transId:"+transactionId+" productId:"+productId+" receipt"+JSON.stringify(receipt));
+      };
+
+      IAP.onError = function (errorCode, errorMessage) {
+        alert('Error: ' + errorMessage);
+      };
+
+
+
+
       IAP.load();
     }
     </script>
