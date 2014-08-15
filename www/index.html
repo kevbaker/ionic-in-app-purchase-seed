@@ -19,25 +19,47 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
+    <!--script src="js/app.js"></script>
+    <script src="js/controllers.js"></script-->
   </head>
 
-  <body ng-app="starter">
-    <ion-nav-view></ion-nav-view>
+  <!-- body ng-app="starter" -->
+  <!--ion-nav-view></ion-nav-view-->
+  <body>
+    <div id="main" style="margin-top:50px">
+      <h1>
+        <a href="#" onclick="initApp();">Init IAP App</a>
+      </h1>
+    </div>
     <script>
+    alert("IAP Example");
+
+    function alertlog(msg){
+      alert(msg);
+      console.log(msg);
+    }
+
+    function initApp(){
+
+      alertlog("initApp");
 
       var IAP = {
         list: [ "M1" ]
       };
-
+      alertlog("before IAP.load");
       IAP.load = function () {
+        alert("IAP.load called");
         // Check availability of the storekit plugin
         if (!window.storekit) {
-          console.log("In-App Purchases not available");
+          alert("In-App Purchases not available");
           return;
         }
-
+        else {
+          alert("In-App Purchase available!");
+        }
+        /*
+        alertlog("before storekit.init");
+        console.log(storekit);
         // Initialize
         storekit.init({
           debug:    true, // Enable IAP messages on the console
@@ -49,14 +71,23 @@
       };
 
       // StoreKit's callbacks (we'll talk about them later)
-      IAP.onReady = function () {};
-      IAP.onPurchase = function () {};
-      IAP.onRestore = function () {};
-      IAP.onError = function () {};
+      IAP.onReady = function () {
+        alertlog("IAP.onReady defined!");
+      };
+      IAP.onPurchase = function () {
+        alertlog("IAP.onPurchase!");
+      };
+      IAP.onRestore = function () {
+        alertlog("IAP.onRestore!");
+      };
+      IAP.onError = function () {
+        alertlog("IAP.onError!");
+      };
 
-      // storekit.load(productIds, callback)
+      // storekit.load(productIds, callback) ???? what is this for?
 
       IAP.onReady = function () {
+          alertlog("IAP.onReady!")
           // Once setup is done, load all product data.
           storekit.load(IAP.list, function (products, invalidIds) {
             IAP.products = products;
@@ -64,9 +95,12 @@
             for (var i = 0; i < invalidIds.length; ++i) {
               console.log("Error: could not load " + invalidIds[i]);
             }
+            alertlog("after storekit.load");
         });
+      */
       };
-
+      IAP.load();
+    }
     </script>
   </body>
 </html>
