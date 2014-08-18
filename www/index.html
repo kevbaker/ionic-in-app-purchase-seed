@@ -1,160 +1,49 @@
 <!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <br />
+        <br />
+        <div class="app">
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <div id="in-app-purchase-list">
+                Loading IAP...
+            </div>
+        </div>
+        <script src="cordova.js"></script>
+        <script type="text/javascript" src="js/iap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
-    <!--script src="js/app.js"></script>
-    <script src="js/controllers.js"></script-->
-  </head>
-
-  <!-- body ng-app="starter" -->
-  <!--ion-nav-view></ion-nav-view-->
-  <body onload="">
-
-    <div id="main" style="margin-top:50px">
-      <h1>
-        <a href="#" onclick="initApp();">Init IAP App</a>
-      </h1>
-      <div id="in-app-purchase-list">
-      </div>
-    </div>
-
-    <script>
-
-    function buy(productId) {
-      alert("buy stuff");
-      //storekit.purchase(productId);
-      storekit.purchase('M1');
-    };
-
-    function alertlog(msg){
-      //alert(msg);
-      console.log(msg);
-    }
-
-    //document.addEventListener('deviceready', initApp(), false);
-
-    function loadApp(){
-
-    }
-    function initApp(){
-
-      alertlog("initApp");
-
-      var IAP = {
-        list: [ "M1" ]
-      };
-
-      IAP.buy = function(productId) {
-        alert("buy stuff");
-        storekit.purchase(productId);
-      };
-
-      alertlog("before IAP.load");
-      IAP.load = function () {
-        // Check availability of the storekit plugin
-        if (!window.storekit) {
-          alert("In-App Purchases not available");
-          return;
-        }
-        else {
-          alertlog("In-App Purchase available!");
-        }
-        alertlog("before storekit.init");
-        console.log(storekit);
-        // Initialize
-        storekit.init({
-          debug:    true, // Enable IAP messages on the console
-          ready:    IAP.onReady,
-          purchase: IAP.onPurchase,
-          restore:  IAP.onRestore,
-          error:    IAP.onError
-        });
-      };
-
-      // StoreKit's callbacks (we'll talk about them later)
-      IAP.onReady = function () {
-        alertlog("IAP.onReady defined!");
-      };
-      IAP.onPurchase = function () {
-        alertlog("IAP.onPurchase!");
-      };
-      IAP.onRestore = function () {
-        alertlog("IAP.onRestore!");
-      };
-      IAP.onError = function () {
-        alertlog("IAP.onError!");
-      };
-
-      // storekit.load(productIds, callback) ???? what is this for?
-
-      IAP.onReady = function () {
-          alertlog("IAP.onReady!")
-          // Once setup is done, load all product data.
-          storekit.load(IAP.list, function (products, invalidIds) {
-            IAP.products = products;
-            IAP.loaded = true;
-            for (var i = 0; i < invalidIds.length; ++i) {
-              console.log("Error: could not load " + invalidIds[i]);
-            }
-            alertlog("after storekit.load");
-            renderIAPs(document.getElementById('in-app-purchase-list'));
-        });
-      };
-
-
-
-      var renderIAPs = function (el) {
-        if (IAP.loaded) {
-          var html = "<ul>";
-          for (var id in IAP.products) {
-            var prod = IAP.products[id];
-            html += "<li>" +
-             "<h3>" + prod.title + "</h3>" +
-             "<p>" + prod.description + "</p>" +
-             "<a href='#' " +
-             "onclick='IAP.buy(\"" + prod.id + "\")'>buy monkey for " +
-             prod.price + "</a>" +
-             "</li>";
-          }
-          html += "</ul>";
-          el.innerHTML = html;
-        }
-        else {
-          el.innerHTML = "In-App Purchases not available.";
-        }
-      };
-
-      IAP.onPurchase = function (transactionId, productId, receipt) {
-        alert('Congratulation, you know own a monkey');
-        alert("transId:"+transactionId+" productId:"+productId+" receipt"+JSON.stringify(receipt));
-      };
-
-      IAP.onError = function (errorCode, errorMessage) {
-        alert('Error: ' + errorMessage);
-      };
-
-
-
-
-      IAP.load();
-    }
-    </script>
-  </body>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
 </html>
