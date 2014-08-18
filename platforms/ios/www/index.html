@@ -26,6 +26,7 @@
   <!-- body ng-app="starter" -->
   <!--ion-nav-view></ion-nav-view-->
   <body onload="">
+
     <div id="main" style="margin-top:50px">
       <h1>
         <a href="#" onclick="initApp();">Init IAP App</a>
@@ -33,23 +34,38 @@
       <div id="in-app-purchase-list">
       </div>
     </div>
+
     <script>
+
+    function buy(productId) {
+      alert("buy stuff");
+      //storekit.purchase(productId);
+      storekit.purchase('M1');
+    };
 
     function alertlog(msg){
       //alert(msg);
       console.log(msg);
     }
 
+    document.addEventListener('deviceready', initApp(), false);
+
     function loadApp(){
 
     }
     function initApp(){
 
-      //alertlog("initApp");
+      alertlog("initApp");
 
       var IAP = {
         list: [ "M1" ]
       };
+
+      IAP.buy = function(productId) {
+        alert("buy stuff");
+        storekit.purchase(productId);
+      };
+
       alertlog("before IAP.load");
       IAP.load = function () {
         // Check availability of the storekit plugin
@@ -102,23 +118,18 @@
         });
       };
 
-      function buy(productId) {
-        alert("buy stuff");
-        storekit.purchase(productId);
-      };
+
 
       var renderIAPs = function (el) {
         if (IAP.loaded) {
-          var coins10  = IAP.products["cc.fovea.coins10"];
-          var coins100 = IAP.products["cc.fovea.coins100"];
           var html = "<ul>";
           for (var id in IAP.products) {
             var prod = IAP.products[id];
-            html += "<li>" + 
+            html += "<li>" +
              "<h3>" + prod.title + "</h3>" +
              "<p>" + prod.description + "</p>" +
              "<a href='#' " +
-             "onclick='buy(\"" + prod.id + "\")'>buy monkey for " +
+             "onclick='IAP.buy(\"" + prod.id + "\")'>buy monkey for " +
              prod.price + "</a>" +
              "</li>";
           }
