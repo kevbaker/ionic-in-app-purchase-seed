@@ -65,6 +65,33 @@ IAP.initialize = function (list) {
 };
 
 
+// Methods //
+
+// Buy product by calling StoreKit.purchase()
+IAP.buy = function (productId, callback) {
+    // console.log("IAP.buy!");
+    IAP.purchaseCallback = callback;
+    window.storekit.purchase(productId);
+};
+
+IAP.doTest = function (msg) {
+  alert("IAP.doTest: "+msg);
+};
+
+// Restore products by calling StoreKit.restore()
+IAP.restore = function () {
+    // console.log("IAP.restore!");
+    window.storekit.restore();
+};
+
+// Add a product to the product list
+IAP.addProduct = function (productId){
+    IAP.list.push(productId);
+};
+
+
+// Callbacks //
+
 // onReady Callback to initialize application
 IAP.onReady = function () {
 
@@ -91,30 +118,6 @@ IAP.onReady = function () {
       console.log('appStoreReceipt: ' + receipts.appStoreReceipt);
     });
 };
-
-
-// Methods //
-
-// Buy product by calling StoreKit.purchase()
-IAP.buy = function (productId, callback) {
-    // console.log("IAP.buy!");
-    IAP.purchaseCallback = callback;
-    window.storekit.purchase(productId);
-};
-
-// Restore products by calling StoreKit.restore()
-IAP.restore = function () {
-    // console.log("IAP.restore!");
-    window.storekit.restore();
-};
-
-// Add a product to the product list
-IAP.addProduct = function (productId){
-    IAP.list.push(productId);
-};
-
-
-// Callbacks //
 
 // optional override in application
 IAP.onStoreReceipt = function (receipts) {

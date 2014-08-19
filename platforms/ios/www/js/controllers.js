@@ -1,6 +1,11 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, IAPFactory) {
+
+  IAPFactory.doTest("Test from AppCtrl");
+
+  IAPFactory.setVar("monkey1234");
+      
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -34,12 +39,19 @@ angular.module('starter.controllers', [])
 })
 .controller('ProductCtrl', function($scope, $stateParams) {
 })
-.controller('ProductsCtrl', function($scope){
+.controller('ProductsCtrl', function($scope, IAPFactory){
+
+  alert("ProductsCtrl IAPFactory.testVar:"+IAPFactory.getVar());
+
   $scope.products = [
     {"id":1, "title":"Monkey One"},
     {"id":2, "title":"Monkey Two"}
   ];
-  $scope.buy = function (productId){
+  
+  $scope.buy = function (productId) {
+    console.log("buy product:"+productId);
     alert("buy product: "+productId);
-  }
+    IAPFactory.doTest("Test from ProductsCtrl");
+  };
+  
 });
