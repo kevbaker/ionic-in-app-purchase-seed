@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F248683C-717D-4FA4-AB3B-F58924C4DA76</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Monkey Store</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>43636E93-8845-4EBE-87F2-55F5BC473EAC</key>
+		<string>ssh://github.com/kevbaker/ionic-in-app-purchase-seed.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/Monkey Store.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>43636E93-8845-4EBE-87F2-55F5BC473EAC</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/kevbaker/ionic-in-app-purchase-seed.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>43636E93-8845-4EBE-87F2-55F5BC473EAC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>43636E93-8845-4EBE-87F2-55F5BC473EAC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ionic-in-app-purchase-seed</string>
+		</dict>
+	</array>
+</dict>
+</plist>
