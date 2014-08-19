@@ -38,7 +38,7 @@ var app = {
     onDeviceReady: function() {
         console.log("app.onDeviceReady!!");
         app.receivedEvent('deviceready');
-        var productList = ["M1"];
+        var productList = ["M1","M2","MF1.CONSUMABLE"];
 
 
         // override onFinish callback function
