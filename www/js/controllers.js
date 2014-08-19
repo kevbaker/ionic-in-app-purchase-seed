@@ -5,7 +5,21 @@ angular.module('starter.controllers', [])
   IAPFactory.doTest("Test from AppCtrl");
 
   IAPFactory.setVar("monkey1234");
-      
+  
+  $scope.IAP = IAPFactory;
+ 
+  $scope.IAP.IAP.render = function(){
+    alert("IAP.render()!");
+  };
+ 
+  var onDeviceReady = function(){
+    alert("onDeviceReady!");
+    var productList = ["M1","M2","MF1.CONSUMABLE"];
+    $scope.IAP.initialize(productList);
+  };
+
+  document.addEventListener('deviceready', onDeviceReady, false);
+
   // Form data for the login modal
   $scope.loginData = {};
 

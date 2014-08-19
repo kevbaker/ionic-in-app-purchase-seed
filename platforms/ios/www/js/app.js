@@ -17,7 +17,6 @@ var starterModule = angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    
   });
 })
 
