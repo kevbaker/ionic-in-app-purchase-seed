@@ -32,6 +32,7 @@ var IAP = {
     products: {}
 };
 
+// Constructor
 IAP.initialize = function (list) {
     
     // Setup the productId list
@@ -58,6 +59,8 @@ IAP.initialize = function (list) {
     });
 };
 
+
+// onReady Callback to initialize application
 IAP.onReady = function () {
 
     // Once setup is done, load all product data.
@@ -84,6 +87,9 @@ IAP.onReady = function () {
     });
 };
 
+
+// Methods //
+
 // Buy product by calling StoreKit.purchase()
 IAP.buy = function (productId, callback) {
     // console.log("IAP.buy!");
@@ -101,6 +107,9 @@ IAP.restore = function () {
 IAP.addProduct = function (productId){
     IAP.list.push(productId);
 };
+
+
+// Callbacks //
 
 // optional override in application
 IAP.onStoreReceipt = function (receipts) {
