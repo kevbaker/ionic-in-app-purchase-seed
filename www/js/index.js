@@ -1,5 +1,3 @@
-"use strict";
-
 /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -19,6 +17,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var localStorage = window.localStorage || {};
+
 var app = {
     // Application Constructor
     initialize: function() {
