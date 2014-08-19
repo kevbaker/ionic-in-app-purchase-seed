@@ -17,7 +17,6 @@ angular.module('starter.controllers', [])
     var productList = ["M1","M2","MF1.CONSUMABLE"];
     $scope.IAPFactory.initialize(productList);
   };
-
   document.addEventListener('deviceready', onDeviceReady, false);
 
   // Form data for the login modal
@@ -55,17 +54,18 @@ angular.module('starter.controllers', [])
 })
 .controller('ProductsCtrl', function($scope, IAPFactory){
 
-  alert("ProductsCtrl IAPFactory.testVar:"+IAPFactory.getVar());
+//  alert("ProductsCtrl IAPFactory.testVar:"+IAPFactory.getVar());
 
   $scope.products = [
-    {"id":1, "title":"Monkey One"},
-    {"id":2, "title":"Monkey Two"}
+    {"id":"M2", "title":"Buy Monkey Two"},
+    {"id":"MF1.CONSUMABLE", "title":"Buy Monkey Food One"}
   ];
   
   $scope.buy = function (productId) {
     console.log("buy product:"+productId);
     alert("buy product: "+productId);
-    IAPFactory.doTest("Test from ProductsCtrl");
+    IAPFactory.buy(productId);
+//    IAPFactory.doTest("Test from ProductsCtrl");
   };
-  
+ 
 });

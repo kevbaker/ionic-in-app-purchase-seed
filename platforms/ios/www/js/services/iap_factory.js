@@ -1,5 +1,4 @@
-/*
- * IAP Factory - StoreKit Interface
+/* IAP Factory - StoreKit Interface
  * 
  * Source:
  * 
@@ -23,8 +22,6 @@ starterModule.factory("IAPFactory", function () {
 
   // Constructor
   IAP.initialize = function(_list) {
-
-    alert("IAP.initialize! list:" + JSON.stringify(_list));
 
     // Setup the productId list
     if (_list) {
@@ -79,7 +76,8 @@ starterModule.factory("IAPFactory", function () {
 
   // onReady Callback to initialize application
   IAP.onReady = function() {
-    alert("IAP.onReady!")
+    alert("IAP.onReady!");
+
     // Once setup is done, load all product data.
     window.storekit.load(IAP.list, function(products, invalidIds) {
       console.log('IAPs loading done:');
@@ -90,7 +88,7 @@ starterModule.factory("IAPFactory", function () {
             ' price:' + p.price +
             ' id:' + p.id);
         IAP.products[p.id] = p;
-      }
+      };
       IAP.loaded = true;
       for (var i = 0; i < invalidIds.length; ++i) {
         console.log('Error: could not load ' + invalidIds[i]);
@@ -147,6 +145,7 @@ starterModule.factory("IAPFactory", function () {
 
   return {
     initialize: IAP.initialize,
+    buy: IAP.buy,
     IAP: IAP,
     doTest: IAP.doTest,
     getVar: getVar,
