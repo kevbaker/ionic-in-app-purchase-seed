@@ -6,16 +6,16 @@ angular.module('starter.controllers', [])
 
   IAPFactory.setVar("monkey1234");
   
-  $scope.IAP = IAPFactory;
+  $scope.IAPFactory = IAPFactory;
  
-  $scope.IAP.IAP.render = function(){
-    alert("IAP.render()!");
+  $scope.IAPFactory.IAP.render = function(){
+    alert("IAP.render()! products:" + JSON.stringify($scope.IAPFactory.IAP.products) );
   };
  
   var onDeviceReady = function(){
     alert("onDeviceReady!");
     var productList = ["M1","M2","MF1.CONSUMABLE"];
-    $scope.IAP.initialize(productList);
+    $scope.IAPFactory.initialize(productList);
   };
 
   document.addEventListener('deviceready', onDeviceReady, false);
