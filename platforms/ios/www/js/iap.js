@@ -1,4 +1,4 @@
-var localStorage = window.localStorage || {};
+"use strict";
 
 var IAP = {
     list: [],
@@ -10,15 +10,15 @@ IAP.addProduct = function (productId){
 };
 
 IAP.initialize = function (list) {
-
+    
+    // setup the productId list
     if(list){
         IAP.list = list;
     };
     
-    alert("IAP.initialize! list:"+IAP.list[0]);
     // Check availability of the storekit plugin
     if (!window.storekit) {
-        console.log('In-App Purchases not available');
+        alert('In-App Purchases (Storekit) not available');
         return;
     }
 
@@ -36,7 +36,7 @@ IAP.initialize = function (list) {
 };
 
 IAP.onReady = function () {
-    alert("IAP.onReady!");
+
     // Once setup is done, load all product data.
     window.storekit.load(IAP.list, function (products, invalidIds) {
         console.log('IAPs loading done:');
@@ -62,6 +62,11 @@ IAP.onReady = function () {
 };
 
 IAP.onPurchase = function (transactionId, productId) {
+    console.log("IAP.onPurchase! transactionId:"+transactionId+" productId:"+productId);
+};
+
+/* Moved this to the app as an override function
+IAP.onPurchase = function (transactionId, productId) {
     alert("IAP.onPurchase!");
     var n = (localStorage['storekit.' + productId]|0) + 1;
     localStorage['storekit.' + productId] = n;
@@ -77,10 +82,11 @@ IAP.onPurchase = function (transactionId, productId) {
         console.log('Receipt for ' + productId + ' = ' + receipts.forProduct(productId));
     });
 };
+*/
 
+// override in application
 IAP.onFinish = function (transactionId, productId) {
-    console.log('Finished transaction for ' + productId + ' : ' + transactionId);
-    alert("IAP.onFinish! Purchase complete: productId:"+productId+" transactionId:"+transactionId);
+    console.log("IAP.onFinish! Purchase complete: productId:"+productId+" transactionId:"+transactionId);
 };
 
 IAP.onError = function (errorCode, errorMessage) {
@@ -88,15 +94,20 @@ IAP.onError = function (errorCode, errorMessage) {
 };
 
 IAP.onRestore = function (transactionId, productId) {
+    console.log("IAP.onRestore! transactionId:"+transactionId+" productId:"+productId);
+}
+
+/*
+IAP.onRestore = function (transactionId, productId) {
     // console.log("IAP.onRestor!");
     console.log("Restored: " + productId);
     var n = (localStorage['storekit.' + productId]|0) + 1;
     localStorage['storekit.' + productId] = n;
 };
+*/
 
 IAP.onRestoreCompleted = function () {
-    // console.log("IAP.onRestoreCompleted!");
-    console.log("Restore Completed");
+    console.log("IAP.onRestoreCompleted!");
 };
 
 IAP.buy = function (productId, callback) {
@@ -110,6 +121,4 @@ IAP.restore = function () {
     window.storekit.restore();
 };
 
-IAP.fullVersion = function () {
-    return localStorage['storekit.M1'];
-};
+

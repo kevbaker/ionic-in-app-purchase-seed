@@ -1,4 +1,4 @@
-alert('loading index.js');
+"use strict";
 
 /*
  *
@@ -36,12 +36,38 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log("app.onDeviceReady!");
+        console.log("app.onDeviceReady!!");
         app.receivedEvent('deviceready');
         var productList = ["M1"];
-        IAP.initialize(productList);
 
-        // override render function
+
+        // override onFinish callback function
+        IAP.onFinish = function (transactionId, productId) {
+            console.log("IAP.onFinish! Purchase complete: productId:"+productId+" transactionId:"+transactionId);
+            alert("IAP.onFinish!! Purchase complete: productId:"+productId+" transactionId:"+transactionId);
+        };
+
+        // override onPurchase callback function
+        IAP.onPurchase = function (transactionId, productId) {
+            console.log("IAP.onPurchase!! transactionId:"+transactionId+" productId:"+productId);
+            alert("IAP.onPurchase!! transactionId:"+transactionId+" productId:"+productId);
+            var n = (localStorage['storekit.' + productId]|0) + 1;
+            localStorage['storekit.' + productId] = n;
+            if (IAP.purchaseCallback) {
+                IAP.purchaseCallback(productId);
+                delete IAP.purchaseCallback;
+            }
+
+            window.storekit.finish(transactionId);
+
+            window.storekit.loadReceipts(function (receipts) {
+                console.log('Receipt for appStore = ' + receipts.appStoreReceipt);
+                console.log('Receipt for ' + productId + ' = ' + receipts.forProduct(productId));
+            });
+        };
+
+        // Override render function
+        // Render teh products to the screen
         IAP.render = function () {
             var el = document.getElementById('in-app-purchase-list');
             if (IAP.loaded) {
@@ -77,6 +103,7 @@ var app = {
                 el.innerHTML = "In-App Purchases not available";
             }
         };
+        IAP.initialize(productList);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
