@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
-      <ion-item ng-repeat="product in products" href="#/app/products/{{product.id}}">
+      <ion-item ng-repeat="product in products" ng-click="buy({{product.id}})">
         {{product.title}}
       </ion-item>
     </ion-list>

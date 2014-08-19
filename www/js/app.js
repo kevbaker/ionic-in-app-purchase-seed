@@ -31,11 +31,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.product', {
-      url: "/product",
+      url: "/product/:productId",
       views: {
         'menuContent' :{
           templateUrl: "templates/product.html",
           controller: 'ProductCtrl'
+        }
+      }
+    })
+
+    .state('app.products', {
+      url: "/products",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/products.html",
+          controller: 'ProductsCtrl'
         }
       }
     })
@@ -50,6 +60,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/product');
+  $urlRouterProvider.otherwise('/app/products');
 });
 

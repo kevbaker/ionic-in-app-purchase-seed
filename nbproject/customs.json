@@ -1,0 +1,9 @@
+{
+    "elements": {
+        "ion-nav-view": {},
+        "ion-list": {},
+        "ion-content": {},
+        "ion-view": {}
+    },
+    "attributes": {}
+}

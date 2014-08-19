@@ -5,6 +5,8 @@ Project to experiment with in-app purchase on iOS and Android for an Ionic proje
 ## Details
 
 * This project follows [this tutorial](http://fovea.cc/blog/index.php/3-steps-tutorial-for-phonegap-in-app-purchase-on-ios/) for iOS integration.
+* The In App purchase interface for this project is in the "www/js/iap.js" file. This file can be moved into any project to interface with the App
+        Store for in-app purchases.
 
 ## Using this project
 

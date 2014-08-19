@@ -33,4 +33,13 @@ angular.module('starter.controllers', [])
   };
 })
 .controller('ProductCtrl', function($scope, $stateParams) {
+})
+.controller('ProductsCtrl', function($scope){
+  $scope.products = [
+    {"id":1, "title":"Monkey One"},
+    {"id":2, "title":"Monkey Two"}
+  ];
+  $scope.buy = function (productId){
+    alert("buy product: "+productId);
+  }
 });

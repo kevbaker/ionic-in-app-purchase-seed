@@ -21,9 +21,14 @@
 /*
  * IAP StoreKit Interface
  * 
+ * Source:
+ * 
+ *  * [Github IAP.js source]( https://github.com/kevbaker/ionic-in-app-purchase-seed/blob/master/www/js/iap.js )
+ * 
  * Usage:
- *  * Override the "onPurchase" and "onFinish" methods to integrate with app
- *  * Purchases should be persisted in the app
+ * 
+ *  * Override the "onPurchase" and "onFinish" methods to integrate with app.
+ *  * Purchases should be persisted in the app.
  *  * NOTE: make sure to override methods before the "initialize" method is called. 
  *  
  */
